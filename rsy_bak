@@ -1,0 +1,38 @@
+#!/bin/bash
+
+EMAIL_ADDRESS="shawn.dumser@gmail.com"
+
+F_GCONF="/usr/local/etc/rsy_bak.conf"
+D_CONF="/usr/local/etc/rsy_bak.d"
+
+# Standard ssh port
+PORT=22
+
+function email_n_fail {
+	/usr/bin/mail -s "${HOSTNAME} rsy_bak failed, job: ${JOBNAME}" "${EMAIL_ADDRESS}" < $1
+	exit
+}
+
+# Configs need the jobname, so set that, first.
+JOBNAME=$1
+
+# Source global and job specific configs
+F_CONF=${D_CONF}/${JOBNAME}
+if [ ! -f ${F_CONF} ]; then
+	email_n_fail "Config does not exist: ${F_CONF}"
+fi
+
+. ${F_GCONF}
+. ${F_CONF}
+
+# allow for non-standard port
+STR_PORT="ssh -p ${PORT}"
+
+# Perform the transfer
+nice rsync ${TEST} -e "${STR_PORT}" ${ARGS} ${BAK} ${DEL} ${SPEED} ${SRC} ${DST}
+
+# Compress the log
+gzip ${F_LOG}
+
+# Delete the new dated diff directory if it is empty
+[ "$(ls -A ${D_DIFF})" ] || rmdir ${D_DIFF}

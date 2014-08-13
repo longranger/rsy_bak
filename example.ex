@@ -1,0 +1,13 @@
+/dev/*
+/lost+found
+/media/*
+/mnt/*
+/proc/*
+/run/*
+/srv/nfs
+/srv/vmware/*/*vmdk
+/srv/vb/hdd
+/sys/*
+/tmp/*
+/var/lib/pacman/sync
+/var/cache/pacman/pkg

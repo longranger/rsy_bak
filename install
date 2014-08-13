@@ -1,0 +1,20 @@
+#!/bin/bash
+
+sudo cp rsy_bak /usr/local/bin
+sudo cp rsy_bak.conf /usr/local/etc
+sudo mkdir /usr/local/etc/rsy_bak.d
+sudo mkdir /var/log/rsy_bak
+sudo mkdir /mnt/data/backup/rsy_bak.logs
+sudo cp example /usr/local/etc/rsy_bak.d
+sudo cp example.ex /usr/local/etc/rsy_bak.d
+sudo cp rsy_bak-daily /etc/cron.daily
+echo
+echo
+echo
+echo "Make sure cronie is running"
+echo "sudo systemctl start cronie"
+echo "sudo systemctl enable cronie"
+echo
+echo "And add to root crontab if needed more than daily:"
+echo "sudo crontab -e"
+echo "* * * * * /usr/local/bin/noauto_mounter"
