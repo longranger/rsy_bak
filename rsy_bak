@@ -22,13 +22,15 @@ fi
 . ${F_GCONF}
 . ${F_CONF}
 
+#TODO - haven't figured out how to turn this into a variable that doesn't
+# break the command
 # allow for non-standard port
-if [ $N_PORT ]; then
-	ARG_PORT="-e \"ssh -p ${N_PORT}\""
-fi
+#if [ $N_PORT ]; then
+#	ARG_PORT="-e \"ssh -p ${N_PORT}\""
+#fi
 
 # Perform the transfer
-nice rsync ${TEST} ${ARGS} ${BAK} ${DEL} ${ARG_PORT} ${SPEED} ${SRC} ${DST}
+nice rsync ${TEST} ${ARGS} ${BAK} ${DEL} -e "ssh -p ${N_PORT}" ${SPEED} ${SRC} ${DST}
 
 # Compress the log
 gzip ${F_LOG}
