@@ -24,7 +24,7 @@ fi
 
 # allow for non-standard port
 if [ $N_PORT ]; then
-	ARG_PORT="-e \"ssh -p ${PORT}\""
+	ARG_PORT="-e \"ssh -p ${N_PORT}\""
 fi
 
 # Perform the transfer
