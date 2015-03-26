@@ -1,19 +1,20 @@
 #!/bin/bash
 
-EMAIL_ADDRESS="shawn.dumser@gmail.com"
+EMAIL_ADDRESS="longranger.406@gmail.com"
 
 D_LOG="/var/log/rsy_bak"
-D_LOG_ARCHIVE="/mnt/ext/backup/rsy_bak.logs"
+D_LOG_ARCHIVE="/mnt/bu/rsy_bak.logs"
 
 # Perform the backups
-/usr/local/bin/rsy_bak kold
-/usr/local/bin/rsy_bak kold.pkg
+#/usr/local/bin/rsy_bak kold
+#/usr/local/bin/rsy_bak kold.pkg
 
 # Move the logs to archive (/var/log is in ram or ssd)
 if [ ! -d ${D_LOG_ARCHIVE} ]; then
         $STR_EML="Log archive directory does not exist:\n${D_LOG_ARCHIVE}"
+		echo $STR_EML > /tmp/str_bak.eml
         $STR_SUB="${HOSTNAME} log archive failed"
-        /usr/bin/mail -s "${STR_SUB}" "${EMAIL_ADDRESS}" < ${STR_EML}
+        /usr/bin/mail -s "${STR_SUB}" "${EMAIL_ADDRESS}" < /tmp/str_bak.eml
 fi
 
 mv ${D_LOG}/* ${D_LOG_ARCHIVE}

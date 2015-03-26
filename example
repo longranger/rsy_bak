@@ -4,16 +4,16 @@
 #SPEED="--bwlimit=10000"
 
 # Source path
-SRC="/"
+SRC="vPanther:/"
 
 # Change date format if desired
 #DATE=`date +%F,%H.%M.%S`
+
+#N_PORT=22
 
 #D_DSTROOT="/mnt/bu.500/backup/${JOBNAME}"
 #DST="${D_DSTROOT}/current/"
 #BUD="../${DATE}/"
 
-#PORT=36922
-
-#BAK="--del -b --backup-dir=${BUD}"
+#BAK="--del -b --backup-dir=${BUD}"                                                                                 
 #ARGS="-aAHXhiP --inplace --stats --exclude-from=${F_EX} --log-file=${F_LOG}"
