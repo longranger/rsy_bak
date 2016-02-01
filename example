@@ -1,10 +1,10 @@
 # Set SRC and override defaults below
 
-#TEST="-n"
+TEST="-n"
 #SPEED="--bwlimit=10000"
 
 # Source path
-SRC="vPanther:/"
+SRC="/"
 
 # Change date format if desired
 #DATE=`date +%F,%H.%M.%S`
@@ -17,3 +17,5 @@ SRC="vPanther:/"
 
 #BAK="--del -b --backup-dir=${BUD}"                                                                                 
 #ARGS="-aAHXhiP --inplace --stats --exclude-from=${F_EX} --log-file=${F_LOG}"
+# Windows does not support extended attributes
+#ARGS="-aAHhiP --inplace --stats --exclude-from=${F_EX} --log-file=${F_LOG}"
