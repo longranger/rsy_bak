@@ -1,0 +1,30 @@
+#!/bin/sh
+# Global config file
+F_GCONF="/usr/local/etc/rsy_bak.conf"
+
+# Configs need the jobname, so set that, first.
+JOBNAME=$1
+
+function email_n_fail {
+#TODO add / fix email
+# /usr/bin/mail -s "$HN rsy_bak failed, job: ${JOBNAME}" "${EMAIL_ADDRESS}" < $1
+  echo -e $HN rsy_bak failed job: ${JOBNAME}, $1
+  exit 1
+}
+
+# Source global and job specific configs
+. ${F_GCONF}
+F_CONF=${D_CONF}/${JOBNAME}
+if [ ! -f ${F_CONF} ]; then
+  email_n_fail "Config does not exist: ${F_CONF}"
+fi
+. ${F_CONF}
+
+# Perform the transfer
+nice ionice -c 3 rsync ${TEST} ${ARGS} ${BAK} ${DEL} -e "ssh -p ${N_PORT}" ${SPEED} ${SRC} ${DST}
+
+# Compress the log
+gzip ${F_LOG}
+
+# Delete the new dated diff directory (if it is empty)
+rmdir ${D_DIFF} || true

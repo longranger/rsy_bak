@@ -1,16 +1,2 @@
 #!/bin/bash
-
-cp rsy_bak /usr/local/bin
-cp rsy_bak.conf /usr/local/etc
-mkdir /usr/local/etc/rsy_bak.d
-#mkdir /var/log/rsy_bak
-#mkdir /mnt/data/backup/rsy_bak.logs
-cp example /usr/local/etc/rsy_bak.d
-cp example.ex /usr/local/etc/rsy_bak.d
-#cp rsy_bak-daily /etc/cron.daily
-echo
-echo
-echo
-echo "Make sure cronie is running"
-echo "sudo systemctl start cronie"
-echo "sudo systemctl enable cronie"
+cp -r local/* /usr/local
